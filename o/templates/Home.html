@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orchestrator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Orchestrator</h1>
+    
+    <form action="/" method="POST">
+        <label for="test_type">Test Type:</label>
+        <select name="test_type" id="test_type" required>
+            <option value="AVALANCHE">Avalanche</option>
+            <option value="TSUNAMI">Tsunami</option>
+        </select>
+
+        <label for="test_message_delay">Test Message Delay:</label>
+        <input type="text" name="test_message_delay" id="test_message_delay" required>
+
+        <label for="message_count_per_driver">Message Count per Driver:</label>
+        <input type="text" name="message_count_per_driver" id="message_count_per_driver" required>
+
+        <button type="submit">Configure Test</button>
+    </form>
+
+
+    <form action="/metrics_from_server" method="POST">
+        <input type="submit" value="check">
+    </form>
+
+
+    <h2>Test Details</h2>
+    <ul>
+        {% for test_id, test_config in test_details.items() %}
+            <li>
+                Test ID: {{ test_id }}<br>
+                Test Type: {{ test_config['test_type'] }}<br>
+                Test Message Delay: {{ test_config['test_message_delay'] }}<br>
+                Message Count per Driver: {{ test_config['message_count_per_driver'] }}<br>
+                <form action="/trigger/{{ test_id }}" method="POST">
+                    <button type="submit">Trigger Load Test</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

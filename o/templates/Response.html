@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Test Metrics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Load Test Metrics</h1>
+    
+    <ul>
+        <li>
+            Test ID: {{ test_id }}<br>
+            Mean Latency: {{ metrics['Mean_Latency'] }} seconds<br>
+            Median Latency: {{ metrics['Median_Latency'] }} seconds<br>
+            Min Latency: {{ metrics['Min_Latency'] }} seconds<br>
+            Max Latency: {{ metrics['Max_Latency'] }} seconds
+        </li>
+    </ul>
+</body>
+</html>
